@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="scripts/index.js" type="module"></script>
-    <title>Document</title>
+    <title>Todo List</title>
 </head>
 <body>
-    
+    <div class="add-task">+ Add Task</div>
+
+    <form onsubmit="return false">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title">
+
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category">
+
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description">
+
+        <label for="due-date">Due Date:</label>
+        <input type="date" name="due-date" id="due-date">
+
+        <label for="priority">Priority:</label>
+        <select name="priority" id="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <button>Submit</button>
+    </form>
 </body>
 </html>
+
+<!--
+[
+    {
+        "title": "title",
+        "category": "Default",
+        "description": "description",
+        "due_date": "01/01/2025",
+        "priority": "high",
+        "checked": false,
+    },
+]
+-->

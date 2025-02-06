@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* fonts: "roboto" */
+
 body {
+    background-color: grey;
+    font-family: "roboto";
     font-size: 16px;
+}
+
+/*** ADD TASK ***/
+.add-task {
+    background-color: white;
+    color: black;
+    width: fit-content;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.add-task:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
 }

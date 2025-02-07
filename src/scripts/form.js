@@ -13,12 +13,17 @@ export class Form {
     }
 
     get () {
+        let category;
+        let formCategory = this.category.value;
+        if (formCategory == "") category = "Default";
+        else category = formCategory;
+
         let data = {
             title: this.title.value,
-            category: this.category.value,
-            description: this.description.value,
+            category: category,
             dueDate: this.dueDate.value,
             priority: this.priority.value,
+            description: this.description.value,
             checked: false,
         }
         events.trigger("addTask", data);

@@ -8,16 +8,80 @@ body {
 }
 
 /*** ADD TASK ***/
-.add-task {
-    background-color: white;
-    color: black;
-    width: fit-content;
-    padding: 5px 15px;
-    border-radius: 20px;
+@media only screen and (min-width: 0px) {
+    form {
+        padding: 20px;
+    }
+
+    form > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-task {
+        background-color: white;
+        color: black;
+        width: fit-content;
+        padding: 5px 15px;
+        border-radius: 20px;
+    }
+
+    .add-task:hover {
+        cursor: pointer;
+        background-color: black;
+        color: white;
+    }
 }
 
-.add-task:hover {
-    cursor: pointer;
-    background-color: black;
-    color: white;
+/*** TASKS ***/
+@media only screen and (min-width: 0px) {
+    .task-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .task {
+        background-color: rgb(228, 228, 228);
+        border-radius: 20px;
+    }
+    
+    .task-header {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 10px 15px;
+        border-radius: 20px;
+    }
+    
+    .task-due-date {
+        margin-left: auto;
+    }
+
+    #check, #priority, #edit, #delete {
+        width: 30px;
+    }
+
+    .task-body {
+        background-color: rgb(228, 228, 228);
+        display: flex;
+        flex-direction: column;
+        padding: 10px 15px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .task-modify {
+        display: flex;
+    }
+
+    #delete {
+        margin-left: auto;
+    }
+
+    #delete:hover {
+        cursor: pointer;
+        filter: brightness(90%);
+    }
 }

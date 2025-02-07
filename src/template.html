@@ -10,27 +10,40 @@
     <div class="add-task">+ Add Task</div>
 
     <form onsubmit="return false">
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title">
+        </div>
 
-        <label for="category">Category:</label>
-        <input type="text" name="category" id="category">
+        <div>
+            <label for="category">Category:</label>
+            <input type="text" name="category" id="category">
+        </div>
 
-        <label for="description">Description:</label>
-        <input type="text" name="description" id="description">
+        <div>
+            <label for="due-date">Due Date:</label>
+            <input type="date" name="due-date" id="due-date">
+        </div>
 
-        <label for="due-date">Due Date:</label>
-        <input type="date" name="due-date" id="due-date">
+        <div>
+            <label for="priority">Priority:</label>
+            <select name="priority" id="priority">
+                <option value="none">None</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
 
-        <label for="priority">Priority:</label>
-        <select name="priority" id="priority">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description">
+        </div>
 
-        <button>Submit</button>
+        <div><button>Submit</button></div>
     </form>
+
+    <div class="task-container"></div>
 </body>
 </html>
 

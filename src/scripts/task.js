@@ -7,9 +7,12 @@ export class Task {
         this.tasks = this.taskLoader.loadTasks();
 
         events.subscribe("addTask", this.addTask.bind(this));
+        events.subscribe("deleteTask", this.deleteTask.bind(this));
+        events.trigger("updateTasks", this.tasks);
     }
 
     addTask (task) {
+        task.id = this.#generateUniqueID();
         this.tasks.push(task);
         events.trigger("updateTasks", this.tasks);
     }
@@ -19,14 +22,22 @@ export class Task {
         events.trigger("updateTasks", this.tasks);
     }
 
-    deleteTask (index) {
-        this.tasks.splice(index, index);
+    deleteTask (id) {
+        this.tasks = this.tasks.filter(item => item.id != id);
         events.trigger("updateTasks", this.tasks);
     }
 
     deleteCategory(category) {
         this.tasks = this.tasks.filter(item => item.category != category);
         events.trigger("updateTasks", this.tasks);
+    }
+
+    #generateUniqueID () {
+        let uniqueID = 0;
+        while (this.tasks.find(item => item.id == uniqueID)) {
+            uniqueID++;
+        }
+        return uniqueID;
     }
 }
 

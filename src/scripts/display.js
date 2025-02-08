@@ -42,7 +42,7 @@ export class Display {
 
     #generate (tasks) {
         this.taskContainer.textContent = "";
-        tasks.forEach(item => {
+        tasks.sort((a, b) => a.dueDate > b.dueDate ? 1 : -1).forEach(item => {
             let task = document.createElement("div");
             task.className = "task";
             task.id = item.id;

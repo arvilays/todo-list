@@ -159,8 +159,8 @@ body {
     .task-window {
         display: none;
         position: fixed;
-        top: 50%;
-        left: 50%;
+        top: 390px;
+        left: 560px;
         transform: translate(-50%, -50%);
         background-color: white;
         width: 500px;

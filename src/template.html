@@ -3,33 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/check-circle.svg" type="image/x-icon">
     <script src="scripts/index.js" type="module"></script>
-    <title>Todo List</title>
+    <title>clear.ly</title>
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
+            <div class="sidebar-title">clear.ly</div>
+            <div class="sidebar-description">a simple to-do list.</div>
             <div class="add-task">+ Add Task</div>
-            <!-- <div class="add-project">+ Add Project</div>
-            <div class="project-window">
-                <div>
-                    <label for="project">Project Name:</label>
-                    <input type="text" name="project" id="form-project">
-                </div>
-            </div> -->
-            <div class="project-list">
-                <div class="project">Default</div>
-                <div class="project">Default</div>
-                <div class="project">Default</div>
-            </div>
+            <div class="project-list"></div>
         </div>
         
         <div class="main">
+            <div class="category-title">Default</div>
+            <hr>
             <div class="task-container"></div>
         </div>
     </div>
     
     <div class="task-window">
+        <div class="close-window"><img id="close-window-image" src="./images/window-close.svg" alt="close window"></div>
         <form onsubmit="return false">
             <div>
                 <label for="title">Title:</label>
@@ -67,16 +62,3 @@
     </div>
 </body>
 </html>
-
-<!--
-[
-    {
-        "title": "title",
-        "category": "Default",
-        "description": "description",
-        "due_date": "01/01/2025",
-        "priority": "high",
-        "checked": false,
-    },
-]
--->

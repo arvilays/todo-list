@@ -9,12 +9,15 @@ import { events } from "./pubsub.js";
 
 export class Display {
     constructor () {       
-        this.projectList = document.querySelector(".project-list");
         this.addTask = document.querySelector(".add-task");
         this.taskWindow = document.querySelector(".task-window");
+        this.closeWindowImage = document.querySelector("#close-window-image");
+        this.projectList = document.querySelector(".project-list");
+        this.categoryTitle = document.querySelector(".category-title");
         this.taskContainer = document.querySelector(".task-container");
 
         this.addTask.addEventListener("click", () => { this.toggleTaskWindow("add") });
+        this.closeWindowImage.addEventListener("click", () => { this.hideTaskWindow(); });
         document.addEventListener("keyup", e => {
             if (e.key == "Escape") this.hideTaskWindow();
         });
@@ -42,6 +45,7 @@ export class Display {
         this.taskWindow.style.display = "none";
     }
 
+    // Generate DOM for each task in the tasks array
     #generateTasks (tasks) {
         this.taskContainer.textContent = "";
         tasks.sort((a, b) => a.dueDate > b.dueDate ? 1 : -1).forEach(item => {
@@ -74,9 +78,11 @@ export class Display {
             dueDate.className = "task-due-date";
             dueDate.textContent = item.dueDate;
 
-            let category = document.createElement("div");
+            
+            let category = document.createElement("div"); // Unused
             category.className = "task-category";
             category.textContent = item.category;
+            category.style.display = "none";
 
             let priority = document.createElement("div");
             priority.className = "task-priority";
@@ -93,7 +99,6 @@ export class Display {
             header.appendChild(check);
             header.appendChild(title);
             header.appendChild(dueDate);
-            header.appendChild(category);
             header.appendChild(priority);
 
             // Body
@@ -140,6 +145,7 @@ export class Display {
         });
     }
 
+    // Generate DOM for each unique category in the tasks array
     #generateCategories (categories) {
         this.projectList.textContent = "";
         categories.forEach(category => {
@@ -147,24 +153,10 @@ export class Display {
             project.className = "project";
             project.textContent = category;
             project.addEventListener("click", () => {
+                this.categoryTitle.textContent = category;
                 events.trigger("changeCategory", category);
             });
             this.projectList.appendChild(project);
         });
     }
 }
-/*
-<div class="task">
-    <div class="task-header">
-        <div class="task-check"><img id="check" src="./images/checkbox-blank-circle-outline.svg"></div>
-        <div class="task-title">Go to Sleep</div>
-        <div class="task-due-date">1/13/25</div>
-        <div class="task-priority"><img id="priority" src="./images/alpha-l-box.svg"></div>
-    </div>
-    
-    <div class="task-body">
-        <div class="task-description">sleepy time sleepy time sleepy time sleepy time sleepy time</div>
-        <div class="task-edit"><img id="edit" src="./images/playlist-edit.svg"></div>
-    </div>
-</div>
-*/

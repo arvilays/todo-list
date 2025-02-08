@@ -21,6 +21,7 @@ export class Form {
         events.subscribe("showEditButton", this.#showEditButton.bind(this));
     }
 
+    // Converts form data to object to send out
     get () {
         let category;
         let formCategory = this.category.value;
@@ -39,6 +40,7 @@ export class Form {
         this.clearForm();
     }
 
+    // Same as get(), but retains both checked and id
     edit () {
         let category;
         let formCategory = this.category.value;
@@ -59,6 +61,7 @@ export class Form {
         this.clearForm();
     }
 
+    // Populates form data with currently edited task
     populate (data) {
         this.title.value = data.title;
         this.category.value = data.category;

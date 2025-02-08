@@ -67,17 +67,3 @@ export class Task {
         events.trigger("saveTasks", this.tasks);
     }
 }
-
-/*
-[
-    {
-        "title": "title",
-        "category": "Default",
-        "description": "description",
-        "due_date": "01/01/2025",
-        "priority": "high",
-        "checked": false,
-        "id": "3434234"
-    },
-]
-*/

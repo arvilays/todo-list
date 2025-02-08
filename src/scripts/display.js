@@ -8,10 +8,36 @@ import deleteIcon from "../images/trash-can.svg";
 import { events } from "./pubsub.js";
 
 export class Display {
-    constructor () {
+    constructor () {       
+        this.addTask = document.querySelector(".add-task");
+        this.taskWindow = document.querySelector(".task-window");
         this.taskContainer = document.querySelector(".task-container");
 
+        this.addTask.addEventListener("click", () => { this.toggleTaskWindow("add") });
+        document.addEventListener("keyup", e => {
+            if (e.key == "Escape") this.hideTaskWindow();
+        });
+
         events.subscribe("updateTasks", this.#generate.bind(this));
+        events.subscribe("editTask", this.toggleTaskWindow.bind(this));
+        events.subscribe("hideTaskWindow", this.hideTaskWindow.bind(this));
+    }
+
+    toggleTaskWindow (mode) {
+        let taskWindowDisplay = this.taskWindow.style.display;
+        if (taskWindowDisplay == "" || taskWindowDisplay == "none") this.showTaskWindow();
+        else if (taskWindowDisplay == "revert") this.hideTaskWindow();
+
+        if (mode == "add") events.trigger("showAddButton");
+        else if(mode == "edit") events.trigger("showEditButton");
+    }
+
+    showTaskWindow () {
+        this.taskWindow.style.display = "revert";
+    }
+
+    hideTaskWindow () {
+        this.taskWindow.style.display = "none";
     }
 
     #generate (tasks) {
@@ -30,6 +56,9 @@ export class Display {
             let checkImage = document.createElement("img");
             checkImage.id = "check";
             checkImage.src = emptyCheckIcon;
+            checkImage.addEventListener("click", () => {
+
+            });
             check.appendChild(checkImage);
 
             let title = document.createElement("div");
@@ -39,6 +68,10 @@ export class Display {
             let dueDate = document.createElement("div");
             dueDate.className = "task-due-date";
             dueDate.textContent = item.dueDate;
+
+            let category = document.createElement("div");
+            category.className = "task-category";
+            category.textContent = item.category;
 
             let priority = document.createElement("div");
             priority.className = "task-priority";
@@ -50,10 +83,12 @@ export class Display {
             if (taskPriority == "low") priorityImage.src = lowIcon;
             else if (taskPriority == "medium") priorityImage.src = mediumIcon;
             else if (taskPriority == "high") priorityImage.src = highIcon;
+            else priority.style.display = "none";
 
             header.appendChild(check);
             header.appendChild(title);
             header.appendChild(dueDate);
+            header.appendChild(category);
             header.appendChild(priority);
 
             // Body
@@ -69,6 +104,10 @@ export class Display {
             let editImage = document.createElement("img");
             editImage.id = "edit";
             editImage.src = editIcon;
+            editImage.addEventListener("click", () => {
+                events.trigger("editTask", "edit");
+                events.trigger("populate", item);
+            })
             modify.appendChild(editImage);
             let deleteImage = document.createElement("img");
             deleteImage.id = "delete";
@@ -77,8 +116,6 @@ export class Display {
                 events.trigger("deleteTask", item.id);
                 task.remove();
             });
-
-
             modify.appendChild(deleteImage);
 
             body.appendChild(description);

@@ -7,17 +7,8 @@ body {
     font-size: 16px;
 }
 
-/*** ADD TASK ***/
+/*** ADD TASK / TASK WINDOW ***/
 @media only screen and (min-width: 0px) {
-    form {
-        padding: 20px;
-    }
-
-    form > div {
-        display: flex;
-        flex-direction: column;
-    }
-
     .add-task {
         background-color: white;
         color: black;
@@ -31,9 +22,27 @@ body {
         background-color: black;
         color: white;
     }
+
+    .task-window {
+        display: none;
+        background-color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    form {
+        padding: 20px;
+    }
+
+    form > div {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
-/*** TASKS ***/
+/*** TASK LIST ***/
 @media only screen and (min-width: 0px) {
     .task-container {
         display: flex;
@@ -80,8 +89,8 @@ body {
         margin-left: auto;
     }
 
-    #delete:hover {
+    #delete:hover, #edit:hover {
         cursor: pointer;
-        filter: brightness(90%);
+        filter: brightness(80%);
     }
 }

@@ -7,6 +7,7 @@ export class Task {
         this.tasks = this.taskLoader.loadTasks();
 
         events.subscribe("addTask", this.addTask.bind(this));
+        events.subscribe("editTask", this.editTask.bind(this));
         events.subscribe("deleteTask", this.deleteTask.bind(this));
         events.trigger("updateTasks", this.tasks);
     }
@@ -17,7 +18,8 @@ export class Task {
         events.trigger("updateTasks", this.tasks);
     }
 
-    editTask (index, task) {
+    editTask (task) {
+        let index = this.tasks.findIndex(item => item.id == task.id);
         this.tasks[index] = task;
         events.trigger("updateTasks", this.tasks);
     }

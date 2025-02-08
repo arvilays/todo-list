@@ -9,39 +9,42 @@
 <body>
     <div class="add-task">+ Add Task</div>
 
-    <form onsubmit="return false">
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title">
-        </div>
+    <div class="task-window">
+        <form onsubmit="return false">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="form-title">
+            </div>
 
-        <div>
-            <label for="category">Category:</label>
-            <input type="text" name="category" id="category">
-        </div>
+            <div>
+                <label for="category">Category:</label>
+                <input type="text" name="category" id="form-category" value="Default">
+            </div>
 
-        <div>
-            <label for="due-date">Due Date:</label>
-            <input type="date" name="due-date" id="due-date">
-        </div>
+            <div>
+                <label for="due-date">Due Date:</label>
+                <input type="date" name="due-date" id="form-due-date">
+            </div>
 
-        <div>
-            <label for="priority">Priority:</label>
-            <select name="priority" id="priority">
-                <option value="none">None</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        </div>
+            <div>
+                <label for="priority">Priority:</label>
+                <select name="priority" id="form-priority">
+                    <option value="none">None</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
 
-        <div>
-            <label for="description">Description:</label>
-            <input type="text" name="description" id="description">
-        </div>
+            <div>
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="form-description">
+            </div>
 
-        <div><button>Submit</button></div>
-    </form>
+            <div><button id="form-add">Add Task</button></div>
+            <div><button id="form-edit">Save Changes</button></div>
+        </form>
+    </div>
 
     <div class="task-container"></div>
 </body>

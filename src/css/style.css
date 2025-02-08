@@ -2,27 +2,125 @@
 /* fonts: "roboto" */
 
 body {
-    background-color: grey;
     font-family: "roboto";
     font-size: 16px;
 }
 
-/*** ADD TASK / TASK WINDOW ***/
+/**** CONTAINER ****/
 @media only screen and (min-width: 0px) {
-    .add-task {
+    .container {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: 100vh;
+    }
+}
+
+/*** SIDEBAR ***/
+@media only screen and (min-width: 0px) {
+    .sidebar {
         background-color: white;
-        color: black;
+    }
+    
+    .add-task, .add-project {
+        background-color: hsl(5, 69%, 55%);
+        color: white;
+        font-weight: 500;
         width: fit-content;
         padding: 5px 15px;
         border-radius: 20px;
     }
 
-    .add-task:hover {
+    .add-task:hover, .add-project:hover {
         cursor: pointer;
-        background-color: black;
-        color: white;
+        background-color: hsl(5, 69%, 45%);
     }
 
+    .project {
+        padding: 10px;
+        border: 1px solid grey;
+    }
+
+    .project:hover {
+        cursor: pointer;
+        background-color: rgb(228, 228, 228);
+    }
+}
+
+/*** MAIN ***/
+@media only screen and (min-width: 0px) {
+    .main {
+        background-color: grey;
+        padding: 25px;
+    }
+    
+    .task-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .task {
+        background-color: rgb(228, 228, 228);
+        width: clamp(400px, 40vw, 800px);
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px black;
+    }
+
+    .task-header {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 10px 15px;
+        border-radius: 20px;
+    }
+    
+    .task-title {
+        overflow: hidden;
+    }
+
+    .task-due-date {
+        margin-left: auto;
+    }
+
+    #check:hover, .task-header:hover {
+        cursor: pointer;
+    }
+
+    #check, #priority, #edit, #delete {
+        width: 30px;
+    }
+
+    .task-body {
+        background-color: rgb(228, 228, 228);
+        display: none;
+        flex-direction: column;
+        padding: 10px 15px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .task-description {
+        overflow: hidden;
+    }
+
+    .task-modify {
+        display: flex;
+    }
+
+    #delete {
+        margin-left: auto;
+    }
+
+    #delete:hover, #edit:hover {
+        cursor: pointer;
+        filter: brightness(80%);
+    }
+}
+
+/**** FORM WINDOW ****/
+@media only screen and (min-width: 0px) {
     .task-window {
         display: none;
         background-color: white;
@@ -30,6 +128,11 @@ body {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        width: 500px;
+        padding: 10px;
+        border: 2px solid black;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px rgb(88, 88, 88);
     }
     
     form {
@@ -40,61 +143,31 @@ body {
         display: flex;
         flex-direction: column;
     }
-}
 
-/*** TASK LIST ***/
-@media only screen and (min-width: 0px) {
-    .task-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+    input, select, #form-description {
+        padding: 10px;
+        margin-bottom: 10px;
     }
 
-    .task {
-        background-color: rgb(228, 228, 228);
-        border-radius: 20px;
-    }
-    
-    .task-header {
-        background-color: white;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        padding: 10px 15px;
-        border-radius: 20px;
-    }
-    
-    .task-due-date {
-        margin-left: auto;
+    #form-description {
+        resize: none;
+        height: 200px;
+        margin-bottom: 30px;
     }
 
-    #check, #priority, #edit, #delete {
-        width: 30px;
+    #form-add, #form-edit {
+        font-size: 1.5em;
+        font-weight: 500;
+        padding: 20px;
     }
 
-    .task-body {
-        background-color: rgb(228, 228, 228);
-        display: flex;
-        flex-direction: column;
-        padding: 10px 15px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-    }
-
-    .task-modify {
-        display: flex;
-    }
-
-    #check:hover {
+    #form-add:hover, #form-edit:hover {
         cursor: pointer;
+        filter: brightness(90%);
     }
 
-    #delete {
-        margin-left: auto;
-    }
-
-    #delete:hover, #edit:hover {
-        cursor: pointer;
-        filter: brightness(80%);
+    label {
+        font-size: 1.25em;
+        font-weight: 500;
     }
 }

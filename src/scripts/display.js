@@ -19,7 +19,7 @@ export class Display {
         });
 
         events.subscribe("updateTasks", this.#generate.bind(this));
-        events.subscribe("editTask", this.toggleTaskWindow.bind(this));
+        events.subscribe("toggleTaskWindow", this.toggleTaskWindow.bind(this));
         events.subscribe("hideTaskWindow", this.hideTaskWindow.bind(this));
     }
 
@@ -108,7 +108,8 @@ export class Display {
             editImage.id = "edit";
             editImage.src = editIcon;
             editImage.addEventListener("click", () => {
-                events.trigger("editTask", "edit");
+                events.trigger("toggleTaskWindow");
+                events.trigger("showEditButton");
                 events.trigger("populate", item);
             })
             modify.appendChild(editImage);
@@ -126,6 +127,12 @@ export class Display {
 
             task.appendChild(header);
             task.appendChild(body);
+
+            header.addEventListener("click", () => {
+                let bodyDisplay = body.style.display;
+                if (bodyDisplay == "" || bodyDisplay == "none") body.style.display = "flex";
+                else if (bodyDisplay == "flex") body.style.display = "none";
+            })
 
             this.taskContainer.appendChild(task);
         });

@@ -20,8 +20,9 @@ export class Task {
     }
 
     editTask (task) {
-        let index = this.tasks.findIndex(item => item.id == task.id);
-        this.tasks[index] = task;
+        // let index = this.tasks.findIndex(item => item.id == task.id);
+        this.deleteTask(task.id);
+        this.addTask(task);
         events.trigger("updateTasks", this.tasks);
     }
 

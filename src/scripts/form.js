@@ -83,6 +83,7 @@ export class Form {
     }
 
     #showEditButton () {
+        console.log("showEditButton");
         this.editButton.style.display = "revert";
         this.addButton.style.display = "none";
     }

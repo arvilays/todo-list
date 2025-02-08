@@ -9,6 +9,7 @@ export class Task {
         events.subscribe("addTask", this.addTask.bind(this));
         events.subscribe("editTask", this.editTask.bind(this));
         events.subscribe("deleteTask", this.deleteTask.bind(this));
+        events.subscribe("toggleCheck", this.toggleCheck.bind(this));
         events.trigger("updateTasks", this.tasks);
     }
 
@@ -21,6 +22,12 @@ export class Task {
     editTask (task) {
         let index = this.tasks.findIndex(item => item.id == task.id);
         this.tasks[index] = task;
+        events.trigger("updateTasks", this.tasks);
+    }
+
+    toggleCheck (id) {
+        let index = this.tasks.findIndex(item => item.id == id);
+        this.tasks[index].checked = !this.tasks[index].checked;
         events.trigger("updateTasks", this.tasks);
     }
 

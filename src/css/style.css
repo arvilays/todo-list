@@ -85,6 +85,10 @@ body {
         display: flex;
     }
 
+    #check:hover {
+        cursor: pointer;
+    }
+
     #delete {
         margin-left: auto;
     }

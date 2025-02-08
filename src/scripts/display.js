@@ -55,15 +55,18 @@ export class Display {
             check.className = "task-check";
             let checkImage = document.createElement("img");
             checkImage.id = "check";
-            checkImage.src = emptyCheckIcon;
-            checkImage.addEventListener("click", () => {
-
-            });
+            if (item.checked) checkImage.src = filledCheckIcon;
+            else checkImage.src = emptyCheckIcon;
+            checkImage.addEventListener("click", () => { events.trigger("toggleCheck", item.id) });
             check.appendChild(checkImage);
 
             let title = document.createElement("div");
             title.className = "task-title";
             title.textContent = item.title;
+            if (item.checked) {
+                title.style.textDecoration = "line-through";
+                title.style.opacity = "50%";
+            }
 
             let dueDate = document.createElement("div");
             dueDate.className = "task-due-date";

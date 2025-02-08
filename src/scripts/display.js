@@ -9,6 +9,7 @@ import { events } from "./pubsub.js";
 
 export class Display {
     constructor () {       
+        this.projectList = document.querySelector(".project-list");
         this.addTask = document.querySelector(".add-task");
         this.taskWindow = document.querySelector(".task-window");
         this.taskContainer = document.querySelector(".task-container");
@@ -18,7 +19,8 @@ export class Display {
             if (e.key == "Escape") this.hideTaskWindow();
         });
 
-        events.subscribe("updateTasks", this.#generate.bind(this));
+        events.subscribe("updateTasks", this.#generateTasks.bind(this));
+        events.subscribe("updateCategories", this.#generateCategories.bind(this));
         events.subscribe("toggleTaskWindow", this.toggleTaskWindow.bind(this));
         events.subscribe("hideTaskWindow", this.hideTaskWindow.bind(this));
     }
@@ -40,7 +42,7 @@ export class Display {
         this.taskWindow.style.display = "none";
     }
 
-    #generate (tasks) {
+    #generateTasks (tasks) {
         this.taskContainer.textContent = "";
         tasks.sort((a, b) => a.dueDate > b.dueDate ? 1 : -1).forEach(item => {
             let task = document.createElement("div");
@@ -137,8 +139,20 @@ export class Display {
             this.taskContainer.appendChild(task);
         });
     }
-}
 
+    #generateCategories (categories) {
+        this.projectList.textContent = "";
+        categories.forEach(category => {
+            let project = document.createElement("div");
+            project.className = "project";
+            project.textContent = category;
+            project.addEventListener("click", () => {
+                events.trigger("changeCategory", category);
+            });
+            this.projectList.appendChild(project);
+        });
+    }
+}
 /*
 <div class="task">
     <div class="task-header">

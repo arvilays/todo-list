@@ -5,41 +5,52 @@ export class Task {
     constructor () {
         this.taskLoader = new TaskLoader;
         this.tasks = this.taskLoader.loadTasks();
+        this.categoryFilter = "Default";
 
         events.subscribe("addTask", this.addTask.bind(this));
         events.subscribe("editTask", this.editTask.bind(this));
         events.subscribe("deleteTask", this.deleteTask.bind(this));
         events.subscribe("toggleCheck", this.toggleCheck.bind(this));
-        events.trigger("updateTasks", this.tasks);
+        events.subscribe("changeCategory", this.setCategoryFilter.bind(this));
+        
+        events.trigger("updateTasks", this.tasks.filter(item => item.category == this.categoryFilter));
+        events.trigger("updateCategories", this.getCategories());
     }
 
     addTask (task) {
         task.id = this.#generateUniqueID();
         this.tasks.push(task);
-        events.trigger("updateTasks", this.tasks);
+        this.#update();
     }
 
     editTask (task) {
-        // let index = this.tasks.findIndex(item => item.id == task.id);
         this.deleteTask(task.id);
         this.addTask(task);
-        events.trigger("updateTasks", this.tasks);
+        this.#update();
     }
 
     toggleCheck (id) {
         let index = this.tasks.findIndex(item => item.id == id);
         this.tasks[index].checked = !this.tasks[index].checked;
-        events.trigger("updateTasks", this.tasks);
+        this.#update();
     }
 
     deleteTask (id) {
         this.tasks = this.tasks.filter(item => item.id != id);
-        events.trigger("updateTasks", this.tasks);
+        this.#update();
     }
 
-    deleteCategory(category) {
-        this.tasks = this.tasks.filter(item => item.category != category);
-        events.trigger("updateTasks", this.tasks);
+    getCategories() {
+        let categories = [];
+        this.tasks.forEach(item => {
+            categories.push(item.category);
+        });
+        return [...new Set(categories)];
+    }
+
+    setCategoryFilter(category) {
+        this.categoryFilter = category;
+        this.#update();
     }
 
     #generateUniqueID () {
@@ -48,6 +59,12 @@ export class Task {
             uniqueID++;
         }
         return uniqueID;
+    }
+
+    #update () {
+        events.trigger("updateTasks", this.tasks.filter(item => item.category == this.categoryFilter));
+        events.trigger("updateCategories", this.getCategories());
+        events.trigger("saveTasks", this.tasks);
     }
 }
 
@@ -60,6 +77,7 @@ export class Task {
         "due_date": "01/01/2025",
         "priority": "high",
         "checked": false,
+        "id": "3434234"
     },
 ]
 */

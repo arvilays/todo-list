@@ -2,7 +2,7 @@ import { events } from "./pubsub.js";
 
 export class TaskLoader {
     constructor () {
-        events.subscribe("updateTasks", this.saveTasks);
+        events.subscribe("saveTasks", this.saveTasks);
     }
     
     loadTasks () {

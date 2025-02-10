@@ -8,7 +8,8 @@ import deleteIcon from "../images/trash-can.svg";
 import { events } from "./pubsub.js";
 
 export class Display {
-    constructor () {       
+    constructor () {    
+        this.body = document.querySelector("body");   
         this.addTask = document.querySelector(".add-task");
         this.taskWindow = document.querySelector(".task-window");
         this.closeWindowImage = document.querySelector("#close-window-image");
@@ -26,6 +27,8 @@ export class Display {
         events.subscribe("updateCategories", this.#generateCategories.bind(this));
         events.subscribe("toggleTaskWindow", this.toggleTaskWindow.bind(this));
         events.subscribe("hideTaskWindow", this.hideTaskWindow.bind(this));
+
+        this.body.style.display = "initial";
     }
 
     toggleTaskWindow (mode) {
